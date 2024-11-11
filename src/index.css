@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply antialiased text-base;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+/* Image loading optimization */
+img {
+  @apply transition-opacity duration-300;
+}
+
+img.loading {
+  @apply opacity-0;
+}
+
+img.loaded {
+  @apply opacity-100;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(2px) rotateX(2deg) rotateY(2deg); }
+  50% { transform: translateY(-2px) rotateX(-2deg) rotateY(-2deg); }
+  100% { transform: translateY(2px) rotateX(2deg) rotateY(2deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-delay-1 {
+  animation: fadeIn 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeIn 0.6s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+/* Component styles */
+.glass-card {
+  @apply backdrop-blur-md bg-opacity-10 border border-white/10;
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.hover-scale {
+  @apply transition-transform duration-300 ease-out;
+}
+
+.hover-scale:hover {
+  @apply transform scale-[1.02];
+}
+
+.gold-gradient {
+  @apply bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] bg-clip-text text-transparent;
+}
+
+/* Typography */
+.editorial-text {
+  @apply font-display font-light tracking-wide;
+}
+
+.editorial-letter {
+  @apply font-serif font-bold tracking-tight;
+}
+
+/* Membership card */
+.membership-card {
+  @apply transform-gpu;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+}
+
+.membership-card-content {
+  @apply transform-gpu;
+  transform-style: preserve-3d;
+  animation: float 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .membership-card {
+    transform: none !important;
+  }
+  
+  .membership-card-content {
+    animation: none;
+  }
+  
+  .hover-scale:hover {
+    transform: none;
+  }
+}
+
+/* Prevent FOUC */
+.no-fouc {
+  @apply opacity-0;
+}
+
+.fouc-ready {
+  @apply opacity-100 transition-opacity duration-300;
+}
+
+/* Smooth image loading */
+.image-loading {
+  @apply blur-sm scale-105;
+}
+
+.image-loaded {
+  @apply blur-0 scale-100;
+}
